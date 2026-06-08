@@ -9,8 +9,7 @@ import random
 app = Flask(__name__)
 
 # --- CONFIGURATION ---
-# Hugging Face automatic routing use karta hai, isliye computer-specific direct IPv6 binding hata di hai
-# taaki "Cannot assign requested address" jaise routing errors na aayein.
+# Render/HuggingFace systems ke liye standard dynamic configuration bina IPv6 bind error ke
 def get_ydl_opts(extra=None):
     opts = {
         'quiet': True,
@@ -149,8 +148,8 @@ LAYOUT = """
         </div>
 
         <div class="hidden lg:flex flex-col items-end gap-1 font-mono">
-            <span class="text-[10px] text-green-500 font-bold bg-green-500/10 px-2 py-0.5 rounded">HUGGINGFACE PORT ACTIVE</span>
-            <span class="text-xs text-zinc-400">0.0.0.0:7860</span>
+            <span class="text-[10px] text-green-500 font-bold bg-green-500/10 px-2 py-0.5 rounded">RENDER SERVER ACTIVE</span>
+            <span class="text-xs text-zinc-400">Status: Running</span>
         </div>
     </nav>
 
@@ -434,5 +433,5 @@ def index():
     return render_template_string(LAYOUT)
 
 if __name__ == '__main__':
-    # Hugging Face deployment compatibility ke liye port 7860 aur bind to 0.0.0.0 set kiya hai
-    app.run(host='0.0.0.0', port=7860, debug=False)
+    # Render fallback configurations
+    app.run(host='0.0.0.0', port=10000, debug=False)
